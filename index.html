@@ -147,6 +147,23 @@
             opacity: 1;
             transform: translateY(0); /* Se mueve a su posición original */
         }
+        .contact-title {
+            font-size: 2rem;
+            line-height: 1.1;
+            font-weight: 600;
+            color: #333;
+            margin-top: 25%;
+        }
+        .contact-vh {
+            height: 100vh;
+        }
+        footer {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            position: sticky; /* Sticky positioning keeps it at the bottom */
+            bottom: 0;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -287,6 +304,25 @@
                 </div>
             </div>
         </section>
+
+        <!-- Sección Contacto -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-20 contact-title">
+            <div class="lg:col-span-1">
+                <h2 class="contact-title mb-6">
+                    Contacto
+                </h2>
+                <p class="hero-description max-w-lg">
+                    Transformo ideas en soluciones visuales creativas y funcionales. Especializado en branding, diseño editorial y web, con un enfoque en la comunicación efectiva y la estética moderna.
+                </p>
+            </div>
+            <div class="lg:col-span-1 flex justify-center lg:justify-end">
+                <!-- Puedes añadir una imagen grande o un elemento visual aquí si lo deseas -->
+                <!-- <img src="https://placehold.co/600x400/E0E0E0/333333?text=Imagen+Principal" alt="Imagen principal de portafolio" class="rounded-xl shadow-lg"> -->
+            </div>
+        </section>
+        <footer>
+  <p>&copy; 2024 Mi Empresa. Todos los derechos reservados.</p>
+</footer>
     </main>
 
     <script>
