@@ -152,13 +152,13 @@
             line-height: 1.1;
             font-weight: 600;
             color: #333;
-            margin-top: 25%;
+            margin-top:5%;
         }
         .contact-vh {
             height: 100vh;
         }
         footer {
-            background-color: #f0f0f0;
+            background-color: #333;
             padding: 20px;
             text-align: center;
             position: sticky; /* Sticky positioning keeps it at the bottom */
@@ -172,7 +172,7 @@
             L <span class="text-gray-600">Leandro Barrios Designer.</span>
         </div>
         <!-- Botón DESCARGAR CV en el header con el nuevo estilo -->
-        <a href="#" class="button-80" role="button" download>DESCARGAR CV</a>
+        <a href="#contacto" class="button-80" role="button">CONTACTO</a>
     </header>
 
     <main class="container mx-auto px-4 py-12">
@@ -306,10 +306,11 @@
         </section>
 
         <!-- Sección Contacto -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-20 contact-title">
+        <section id="contacto" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-20 contact-title">
             <div class="lg:col-span-1">
                 <h2 class="contact-title mb-6">
-                    Contacto
+                    Contacto                     <span id="anio-actual"></span>
+
                 </h2>
                 <p class="hero-description max-w-lg">
                     Transformo ideas en soluciones visuales creativas y funcionales. Especializado en branding, diseño editorial y web, con un enfoque en la comunicación efectiva y la estética moderna.
@@ -321,11 +322,16 @@
             </div>
         </section>
         <footer>
-  <p>&copy; 2024 Mi Empresa. Todos los derechos reservados.</p>
+  <p><a href="#" class="button-80" role="button" download>DESCARGAR CV</a></p>
 </footer>
     </main>
 
     <script>
+        // anio-footer
+        const fecha = new Date();
+        const anio = fecha.getFullYear();
+        document.getElementById("anio-actual").textContent = anio;
+
         document.addEventListener('DOMContentLoaded', () => {
             // Selecciona todos los elementos que quieres animar al hacer scroll
             const fadeSections = document.querySelectorAll('.fade-in-section');
