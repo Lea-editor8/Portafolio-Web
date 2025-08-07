@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Cutive Mono', monospace; /* Se ha cambiado la fuente principal */
+            font-family: 'Cutive Mono', monospace, 'Inter', sans-serif; /* Se ha cambiado la fuente principal */
             background-image: linear-gradient(315deg, #d5ddf8, #fff 57%); /* Degrade de fondo */
         }
         .header-logo {
@@ -38,13 +38,15 @@
             overflow: hidden; /* Asegura que la descripción no se desborde */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             transition: transform 0.3s ease-in-out; /* Transición suave para el hover */
+            /* border-radius: 0.75rem; /* Eliminado para quitar el borde redondeado */
+            cursor: pointer; /* Indica que es clickeable */
         }
         .project-item:hover {
             transform: scale(1.02); /* Ligeramente más grande al pasar el ratón */
         }
         .project-image {
             width: 100%;
-            height: 350px; /* Altura fija para las imágenes de proyecto */
+            height: 320px; /* Altura fija para las imágenes de proyecto, ajustada para responsividad */
             object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
             display: block; /* Elimina el espacio extra debajo de la imagen */
         }
@@ -59,6 +61,7 @@
             background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente oscuro */
             color: #fff;
             display: flex;
+            flex-direction: column; /* Alinea el texto y el título verticalmente */
             justify-content: center;
             align-items: center;
             padding: 1.5rem;
@@ -66,6 +69,7 @@
             opacity: 0; /* Inicialmente oculto */
             transition: opacity 0.3s ease-in-out; /* Transición suave */
             pointer-events: none; /* Permite hacer clic a través de la descripción */
+            /* border-radius: 0.75rem; /* Eliminado para quitar el borde redondeado */
         }
 
         .project-item:hover .project-description {
@@ -97,6 +101,7 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
+            /* border-radius: 0.5rem; /* Eliminado para quitar el borde redondeado */
         }
 
         .button-80:not(:disabled):hover {
@@ -133,7 +138,6 @@
             transform: translateY(.125rem);
         }
 
-
         /* Estilos para la animación de scroll */
         .fade-in-section {
             opacity: 0;
@@ -146,15 +150,89 @@
             opacity: 1;
             transform: translateY(0); /* Se mueve a su posición original */
         }
-        .contact-title {
-            font-size: 2rem;
+
+        /* Estilos para la sección de contacto */
+        .contact-section-title {
+            font-size: 3rem; /* Título de contacto ligeramente más pequeño que el hero */
             line-height: 1.1;
             font-weight: 600;
             color: #333;
-            margin-top:5%;
+            margin-bottom: 1.5rem;
         }
-        .contact-vh {
-            height: 100vh;
+        .contact-section-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .social-link {
+            transition: transform 0.2s ease-in-out;
+        }
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Estilos para el modal de imagen */
+        .image-modal {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Posición fija para cubrir toda la pantalla */
+            z-index: 1000; /* Asegura que esté por encima de otros elementos */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Habilita el scroll si la imagen es muy grande */
+            background-color: rgba(0, 0, 0, 0.9); /* Fondo semitransparente oscuro */
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            padding: 20px; /* Espacio alrededor de la imagen */
+        }
+
+        .image-modal-content {
+            margin: auto;
+            display: block;
+            width: 90%; /* Ancho máximo de la imagen */
+            max-width: 95%; /* Límite superior para imágenes muy grandes, ajustado al 95% */
+            height: auto; /* Altura automática para mantener la proporción */
+            border-radius: 0.75rem; /* Mantenido para el modal, ya que mejora la estética */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Responsividad para el modal */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-description {
+                font-size: 1rem;
+            }
+            .project-image {
+                height: 250px; /* Ajuste para pantallas más pequeñas */
+            }
+            .contact-section-title {
+                font-size: 2.2rem;
+            }
+            .image-modal-content {
+                width: 95%; /* Más ancho en móviles */
+            }
         }
         footer {
             padding: 20px;
@@ -170,8 +248,8 @@
         <div class="header-logo">
             LBD <span class="text-gray-600">Leandro Barrios Designer.</span>
         </div>
-        <!-- Botón DESCARGAR CV en el header con el nuevo estilo -->
-        <a href="#contacto" class="button-80" role="button">CONTACTO</a>
+        <!-- Botón CONTACTO en el header -->
+        <a href="#contacto" id="contactButton" class="button-80" role="button">CONTACTO</a>
     </header>
 
     <main class="container mx-auto px-4 py-12">
@@ -187,143 +265,180 @@
             </div>
             <div class="lg:col-span-1 flex justify-center lg:justify-end">
                 <!-- Puedes añadir una imagen grande o un elemento visual aquí si lo deseas -->
-                <!-- <img src="https://placehold.co/600x400/E0E0E0/333333?text=Imagen+Principal" alt="Imagen principal de portafolio" class="rounded-xl shadow-lg"> -->
+                <img src="https://placehold.co/600x400/E0E0E0/333333?text=Tu+Imagen+Principal" alt="Imagen principal de portafolio" class="rounded-xl shadow-lg w-full max-w-md">
             </div>
         </section>
 
         <!-- Sección de Proyectos/Imágenes -->
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
             <!-- Cada contenedor de imagen ahora tiene la clase 'fade-in-section' y 'project-item' -->
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/F0D9D9/884444?text=Branding+Corporativo" alt="Branding Corporativo" class="project-image">
                 <div class="project-description">
-                    <p>Diseño de identidad visual para empresas.</p>
+                    <p class="text-lg font-semibold mb-2">Branding Corporativo</p>
+                    <p>Diseño de identidad visual para empresas, creando marcas memorables y coherentes.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/D9E5F0/446688?text=Dise%C3%B1o+Editorial" alt="Diseño Editorial" class="project-image">
                 <div class="project-description">
-                    <p>Maquetación y diseño de revistas y libros.</p>
+                    <p class="text-lg font-semibold mb-2">Diseño Editorial</p>
+                    <p>Maquetación y diseño de revistas, libros y publicaciones digitales con atención al detalle.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/E0F0D9/668844?text=Dise%C3%B1o+Web" alt="Diseño Web" class="project-image">
                 <div class="project-description">
-                    <p>Diseño de interfaces de usuario y experiencia de usuario.</p>
+                    <p class="text-lg font-semibold mb-2">Diseño Web</p>
+                    <p>Diseño de interfaces de usuario (UI) y experiencia de usuario (UX) para sitios web modernos y responsivos.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/F0E9D9/887744?text=Packaging" alt="Packaging" class="project-image">
                 <div class="project-description">
-                    <p>Creación de empaques atractivos y funcionales.</p>
+                    <p class="text-lg font-semibold mb-2">Packaging</p>
+                    <p>Creación de empaques atractivos y funcionales que destacan en el mercado.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/D9F0F0/448888?text=Ilustraci%C3%B3n" alt="Ilustración" class="project-image">
                 <div class="project-description">
-                    <p>Ilustraciones personalizadas para diversos medios.</p>
+                    <p class="text-lg font-semibold mb-2">Ilustración</p>
+                    <p>Ilustraciones personalizadas para diversos medios, desde digital hasta impreso.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/F0D9F0/884488?text=Motion+Graphics" alt="Motion Graphics" class="project-image">
                 <div class="project-description">
-                    <p>Animaciones y gráficos en movimiento para video.</p>
+                    <p class="text-lg font-semibold mb-2">Motion Graphics</p>
+                    <p>Animaciones y gráficos en movimiento para videos, presentaciones y redes sociales.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/D9D9F0/6666AA?text=Dise%C3%B1o+de+Logos" alt="Diseño de Logos" class="project-image">
                 <div class="project-description">
-                    <p>Creación de logotipos memorables y únicos.</p>
+                    <p class="text-lg font-semibold mb-2">Diseño de Logos</p>
+                    <p>Creación de logotipos memorables y únicos que representan la esencia de su marca.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/F0F0D9/AAAA66?text=Carteler%C3%ADa" alt="Cartelería" class="project-image">
                 <div class="project-description">
-                    <p>Diseño de carteles y señalética.</p>
+                    <p class="text-lg font-semibold mb-2">Cartelería</p>
+                    <p>Diseño de carteles, vallas publicitarias y señalética para impacto visual.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/D9F0D9/66AA66?text=Redes+Sociales" alt="Redes Sociales" class="project-image">
                 <div class="project-description">
-                    <p>Contenido visual para plataformas de redes sociales.</p>
+                    <p class="text-lg font-semibold mb-2">Redes Sociales</p>
+                    <p>Contenido visual optimizado para todas las plataformas de redes sociales.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/F0D9A0/AA8844?text=Infograf%C3%ADas" alt="Infografías" class="project-image">
                 <div class="project-description">
-                    <p>Visualización de datos complejos de forma clara.</p>
+                    <p class="text-lg font-semibold mb-2">Infografías</p>
+                    <p>Visualización de datos complejos de forma clara, concisa y atractiva.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/A0D9F0/4488AA?text=Dise%C3%B1o+de+Apps" alt="Diseño de Apps" class="project-image">
                 <div class="project-description">
-                    <p>Diseño de interfaces intuitivas para aplicaciones móviles.</p>
+                    <p class="text-lg font-semibold mb-2">Diseño de Apps</p>
+                    <p>Diseño de interfaces intuitivas y atractivas para aplicaciones móviles.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/F0A0D9/AA4488?text=Publicidad" alt="Publicidad" class="project-image">
                 <div class="project-description">
-                    <p>Campañas publicitarias con impacto visual.</p>
+                    <p class="text-lg font-semibold mb-2">Publicidad</p>
+                    <p>Creación de campañas publicitarias con un fuerte impacto visual y mensaje claro.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/D9A0F0/8844AA?text=Retoque+Fotogr%C3%A1fico" alt="Retoque Fotográfico" class="project-image">
                 <div class="project-description">
-                    <p>Mejora y manipulación de imágenes.</p>
+                    <p class="text-lg font-semibold mb-2">Retoque Fotográfico</p>
+                    <p>Mejora y manipulación de imágenes para lograr resultados profesionales.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/A0F0D9/44AA88?text=Dise%C3%B1o+de+Presentaciones" alt="Diseño de Presentaciones" class="project-image">
                 <div class="project-description">
-                    <p>Creación de presentaciones visualmente atractivas.</p>
+                    <p class="text-lg font-semibold mb-2">Diseño de Presentaciones</p>
+                    <p>Creación de presentaciones visualmente atractivas y efectivas.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/F0F0F0/666666?text=Dise%C3%B1o+de+Iconos" alt="Diseño de Iconos" class="project-image">
                 <div class="project-description">
-                    <p>Diseño de sets de iconos personalizados.</p>
+                    <p class="text-lg font-semibold mb-2">Diseño de Iconos</p>
+                    <p>Diseño de sets de iconos personalizados para interfaces y branding.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/D0D0D0/555555?text=Tipograf%C3%ADa" alt="Tipografía" class="project-image">
                 <div class="project-description">
-                    <p>Exploración y creación de tipografías.</p>
+                    <p class="text-lg font-semibold mb-2">Tipografía</p>
+                    <p>Exploración y creación de tipografías que realzan el mensaje visual.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/C0C0C0/444444?text=Dise%C3%B1o+de+Flyers" alt="Diseño de Flyers" class="project-image">
                 <div class="project-description">
-                    <p>Creación de flyers y folletos promocionales.</p>
+                    <p class="text-lg font-semibold mb-2">Diseño de Flyers</p>
+                    <p>Creación de flyers y folletos promocionales impactantes y informativos.</p>
                 </div>
             </div>
             <div class="project-item fade-in-section">
                 <img src="https://placehold.co/600x400/B0B0B0/333333?text=Dise%C3%B1o+de+Banners" alt="Diseño de Banners" class="project-image">
                 <div class="project-description">
-                    <p>Diseño de banners web y publicitarios.</p>
+                    <p class="text-lg font-semibold mb-2">Diseño de Banners</p>
+                    <p>Diseño de banners web y publicitarios optimizados para conversiones.</p>
                 </div>
             </div>
         </section>
 
         <!-- Sección Contacto -->
-        <section id="contacto" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-20 contact-title">
-            <div class="lg:col-span-1">
-                <h2 class="contact-title mb-6">
-                    Contacto                     <span id="anio-actual"></span>
-
-                </h2>
-                <p class="hero-description max-w-lg">
-                    Transformo ideas en soluciones visuales creativas y funcionales. Especializado en branding, diseño editorial y web, con un enfoque en la comunicación efectiva y la estética moderna.
-                </p>
+        <section id="contacto" class="flex flex-col py-20 text-left">
+            <h2 class="contact-section-title mb-4">
+                ¡Hablemos de tu próximo proyecto!
+            </h2>
+            
+            <p class="contact-section-description max-w-2xl">
+                ¿Tienes una idea en mente o necesitas un diseño que destaque? Me encantaría escucharte y ayudarte a transformar tus conceptos en realidades visuales impactantes. ¡Contáctame!
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 mb-8">
+                <a href="mailto:leandro.designer@example.com" class="button-80" role="button">
+                    Enviar un Email
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="button-80" role="button">
+                    WhatsApp
+                </a>
             </div>
-            <div class="lg:col-span-1 flex justify-center lg:justify-end">
-                <!-- Puedes añadir una imagen grande o un elemento visual aquí si lo deseas -->
-                <!-- <img src="https://placehold.co/600x400/E0E0E0/333333?text=Imagen+Principal" alt="Imagen principal de portafolio" class="rounded-xl shadow-lg"> -->
+            <div class="flex gap-6">
+                <!-- Social Media Icons (placeholders) -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="social-link text-gray-700 hover:text-blue-600 text-3xl" aria-label="LinkedIn">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="social-link text-gray-700 hover:text-pink-600 text-3xl" aria-label="Instagram">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.251-.149-4.771-1.69-4.919-4.919-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.073 4.948.073s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
             </div>
+            <span id="anio-actual"></span>
         </section>
-        <footer>
-  <p><a href="#" class="button-80" role="button" download>DESCARGAR CV</a></p>
-</footer>
     </main>
+
+    <footer>
+    <p><a href="#" class="button-80" role="button" download>DESCARGAR CV</a></p>
+    </footer>
+
+    <!-- Modal para la imagen ampliada -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-button">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
 
     <script>
         // anio-footer
@@ -359,6 +474,53 @@
             });
 
             console.log('Portafolio web cargado y listo con animación de scroll.');
+
+            // Lógica para el modal de imagen
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeButton = document.getElementsByClassName('close-button')[0];
+            const projectItems = document.querySelectorAll('.project-item'); // Seleccionamos los contenedores de proyecto
+
+            // Añadir evento de clic a cada contenedor de proyecto
+            projectItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const clickedImage = this.querySelector('.project-image'); // Buscamos la imagen dentro del contenedor
+                    if (clickedImage) {
+                        imageModal.style.display = 'flex'; // Muestra el modal
+                        modalImage.src = clickedImage.src; // Establece la fuente de la imagen del modal
+                        modalImage.alt = clickedImage.alt; // Establece el texto alternativo
+                    }
+                });
+            });
+
+            // Cerrar el modal al hacer clic en el botón de cerrar
+            closeButton.addEventListener('click', function() {
+                imageModal.style.display = 'none'; // Oculta el modal
+            });
+
+            // Cerrar el modal al hacer clic fuera de la imagen (en el overlay)
+            imageModal.addEventListener('click', function(event) {
+                if (event.target === imageModal) {
+                    imageModal.style.display = 'none'; // Oculta el modal
+                }
+            });
+
+            // Lógica para el desplazamiento suave al hacer clic en el botón "CONTACTO"
+            const contactButton = document.getElementById('contactButton');
+            if (contactButton) {
+                contactButton.addEventListener('click', function(event) {
+                    event.preventDefault(); // Previene el comportamiento de anclaje predeterminado
+
+                    const targetId = this.getAttribute('href'); // Obtiene el ID del destino (ej. #contacto)
+                    const targetSection = document.querySelector(targetId); // Selecciona la sección de destino
+
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth' // Habilita el desplazamiento suave
+                        });
+                    }
+                });
+            }
         });
     </script>
 </body>
